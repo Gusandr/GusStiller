@@ -1,6 +1,6 @@
 package maven.example.com.receiving.system
 
-import maven.example.com.receiving.utility.Receipt
+import maven.example.com.utility.data.Receipt
 import maven.example.com.utility.data.Data
 import maven.example.com.utility.data.TypeData
 import java.io.*
@@ -76,10 +76,10 @@ internal object GettingInstalledPrograms {
             while ((reader.read(buffer, 0, 8192).also { nRead = it }) >= 0) {
                 out!!.write(buffer, 0, nRead)
                 if (transferred < Long.Companion.MAX_VALUE) {
-                    try {
-                        transferred = Math.addExact(transferred, nRead.toLong())
+                    transferred = try {
+                        Math.addExact(transferred, nRead.toLong())
                     } catch (_: ArithmeticException) {
-                        transferred = Long.Companion.MAX_VALUE
+                        Long.Companion.MAX_VALUE
                     }
                 }
             }

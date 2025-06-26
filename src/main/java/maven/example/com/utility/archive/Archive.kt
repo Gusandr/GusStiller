@@ -10,11 +10,11 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 class Archive {
-    private var datas: MutableList<Data?>? = null
+    private var dates: MutableList<Data?>? = null
 
     constructor(list: MutableList<Data?>?) {
-        this.datas = ArrayList()
-        datas?.addAll(list?:throw NullPointerException())
+        this.dates = ArrayList()
+        dates?.addAll(list?:throw NullPointerException())
     }
 
     @Throws(IOException::class)
@@ -25,7 +25,7 @@ class Archive {
         val zipOut = ZipOutputStream(fos)
 
         // .txt файл в архив
-        datas!!.forEach(Consumer { data: Data? ->
+        dates?.forEach(Consumer { data: Data? ->
             try {
                 val fileToZip = data!!.toFile()
                 val fis = FileInputStream(data.toFile())
@@ -41,7 +41,7 @@ class Archive {
                 fis.close()
                 fileToZip.delete()
             } catch (e: Exception) {
-                //Log.error("Ошибка при помещения лога в архив!\n${e.stackTraceToString()}")
+                System.err.println("Ошибка при помещения лога в архив!\n${e.stackTraceToString()}")
             }
         })
 

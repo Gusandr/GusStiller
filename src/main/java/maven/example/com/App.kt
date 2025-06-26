@@ -7,10 +7,11 @@ object App {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val resourceStream = object {}.javaClass.getResourceAsStream("/CHANGE_THIS.properties")
-            ?: throw IllegalStateException("Resource not found: /CHANGE_THIS.properties")
+        val resourceName = "/CHANGE_THIS.properties"
+        val resourceStream = this::class.java.getResourceAsStream(resourceName)
+            ?: throw IllegalStateException("Resource not found: $resourceName")
 
         Manager.start(resourceStream)
-        println("Good!")
+        println("Success!")
     }
 }

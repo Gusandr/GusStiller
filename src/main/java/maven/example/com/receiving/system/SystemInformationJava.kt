@@ -1,6 +1,6 @@
 package maven.example.com.receiving.system
 
-import maven.example.com.receiving.utility.Receipt
+import maven.example.com.utility.data.Receipt
 import maven.example.com.utility.data.Data
 import maven.example.com.utility.data.TypeData
 import java.util.function.Consumer
@@ -13,7 +13,7 @@ class SystemInformationJava : Receipt(TYPE) {
     override val data: Data?
         get() {
             val sb = StringBuilder()
-            val keys: MutableList<String?> = ArrayList<String?>()
+            val keys: MutableList<String> = ArrayList()
             keys.add("java.version")
             keys.add("java.vendor")
             keys.add("java.home")
@@ -42,7 +42,7 @@ class SystemInformationJava : Receipt(TYPE) {
             keys.add("user.home")
             keys.add("user.dir")
 
-            keys.forEach(Consumer { key: String? ->
+            keys.forEach(Consumer { key: String ->
                 sb
                     .append(key)
                     .append(": ")

@@ -11,7 +11,6 @@ object Config {
         val prop = Properties()
         loadProperties(inputStream, prop)
 
-        //val config = Config.getInstance()
         this.prop = prop
 
         return this
@@ -21,7 +20,7 @@ object Config {
         try {
             prop.load(inputStream)
         } catch (e: IOException) {
-            //Log.error("Произошла ошибка IOException в loadProperties():\n${e.stackTraceToString()}\nФайл: $inputStream\nНастройки: $prop")
+            System.err.println("Произошла ошибка IOException в loadProperties():\n${e.stackTraceToString()}\nФайл: $inputStream\nНастройки: $prop")
         }
     }
 }
