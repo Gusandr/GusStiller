@@ -1,15 +1,17 @@
-package maven.example.com.sending.discord
+package maven.example.com.sending.utility
 
-import java.io.*
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileInputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.io.OutputStream
+import java.io.OutputStreamWriter
+import java.io.PrintWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLConnection
-
-
-/*
- * Код для отправки данных, взят с Stackoverflow. Был написан на Java и переведён мной на Kotlin.
- * Необходим для того что бы не использовать библиотеки и в следствии сократить размер jar файла.
- */
 
 class MultipartUtility(
     private val requestURL: String,

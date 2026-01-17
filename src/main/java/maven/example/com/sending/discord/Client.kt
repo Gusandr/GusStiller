@@ -1,5 +1,6 @@
 package maven.example.com.sending.discord
 
+import maven.example.com.sending.utility.MultipartUtility
 import maven.example.com.sending.utility.SendClient
 import maven.example.com.utility.crypt.Crypto
 import java.io.File

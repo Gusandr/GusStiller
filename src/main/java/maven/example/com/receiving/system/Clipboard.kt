@@ -3,11 +3,8 @@ package maven.example.com.receiving.system
 import maven.example.com.utility.data.Receipt
 import maven.example.com.utility.data.Data
 import maven.example.com.utility.data.TypeData
-import java.awt.HeadlessException
 import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
-import java.awt.datatransfer.UnsupportedFlavorException
-import java.io.IOException
 
 class Clipboard() : Receipt(TYPE) {
 
@@ -18,7 +15,7 @@ class Clipboard() : Receipt(TYPE) {
         get() {
             try {
                 if (Toolkit.getDefaultToolkit().systemClipboard.isDataFlavorAvailable(DataFlavor.stringFlavor)) {
-                    Toolkit.getDefaultToolkit().systemClipboard.getData(DataFlavor.stringFlavor) as String
+                    return Toolkit.getDefaultToolkit().systemClipboard.getData(DataFlavor.stringFlavor) as String
                 } else {
                     null // В буфере не текст (например изображение)
                 }
