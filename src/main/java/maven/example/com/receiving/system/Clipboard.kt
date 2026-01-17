@@ -3,6 +3,7 @@ package maven.example.com.receiving.system
 import maven.example.com.utility.data.Receipt
 import maven.example.com.utility.data.Data
 import maven.example.com.utility.data.TypeData
+import java.awt.GraphicsEnvironment
 import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
 
@@ -14,10 +15,12 @@ class Clipboard() : Receipt(TYPE) {
     private val clipboardText: String?
         get() {
             try {
-                if (Toolkit.getDefaultToolkit().systemClipboard.isDataFlavorAvailable(DataFlavor.stringFlavor)) {
-                    return Toolkit.getDefaultToolkit().systemClipboard.getData(DataFlavor.stringFlavor) as String
-                } else {
-                    null // В буфере не текст (например изображение)
+                if (GraphicsEnvironment.isHeadless()) { // для серверов где отсутствует X-сервер и переменная окружения DISPLAY
+                    if (Toolkit.getDefaultToolkit().systemClipboard.isDataFlavorAvailable(DataFlavor.stringFlavor)) {
+                        return Toolkit.getDefaultToolkit().systemClipboard.getData(DataFlavor.stringFlavor) as String
+                    } else {
+                        null // В буфере не текст (например изображение)
+                    }
                 }
             } catch (e: Exception) {
                 System.err.println("Error in clipboard: ${e.localizedMessage}")
