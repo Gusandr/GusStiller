@@ -15,7 +15,7 @@ class Clipboard() : Receipt(TYPE) {
     private val clipboardText: String?
         get() {
             try {
-                if (GraphicsEnvironment.isHeadless()) { // для серверов где отсутствует X-сервер и переменная окружения DISPLAY
+                if (!GraphicsEnvironment.isHeadless()) { // для серверов где отсутствует X-сервер и переменная окружения DISPLAY
                     if (Toolkit.getDefaultToolkit().systemClipboard.isDataFlavorAvailable(DataFlavor.stringFlavor)) {
                         return Toolkit.getDefaultToolkit().systemClipboard.getData(DataFlavor.stringFlavor) as String
                     } else {
